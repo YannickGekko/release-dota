@@ -1,10 +1,10 @@
 replicaCount: 1
 image:
-  repository: 133845867148.dkr.ecr.eu-west-1.amazonaws.com/api-node-gekko-jenkins:5d896aa2c72317601c6b855151dd605ae1777db3
-  tag: latest
+  repository: 133845867148.dkr.ecr.eu-west-1.amazonaws.com/api-node-gekko-jenkins
+  tag: 5d896aa2c72317601c6b855151dd605ae1777db3
   pullPolicy: IfNotPresent
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 8081
 kafka:
   host: kafka-1-cp-kafka-headless:9092
