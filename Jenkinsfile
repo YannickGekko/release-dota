@@ -11,8 +11,8 @@ podTemplate(containers: [
         stage('Git clone '){
           sh '''
           echo '######################## Deploy node-workers Start #################################'
-          git clone https://github.com/YannickGekko/dotaki-api-node.git
-          cd dotaki-api-node
+          git clone https://github.com/loick-gekko/release-dota.git
+          cd release-dota
           git checkout $BRANCH_NAME
           '''
         }
