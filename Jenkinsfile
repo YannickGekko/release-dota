@@ -20,7 +20,7 @@ podTemplate(containers: [
           container('helm'){
             sh '''
             helm init --client-only
-            helm repo add chartmuseum http://chartmuseum-chartmuseum.chartmuseum.svc.cluster.local:8080
+            helm repo add chartmuseum http://chartmuseum-chartmuseum.admin.svc.cluster.local:8080
             helm repo update
             helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME || helm upgrade $BRANCH_NAME $CHART_NAME
             echo '######################## Deploy node-workers End #################################'
