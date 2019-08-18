@@ -2,7 +2,7 @@ podTemplate(containers: [
   containerTemplate(name: 'helm', image: 'alpine/helm:latest', command: 'cat', ttyEnabled: true)
   ], 
   envVars: [
-    podEnvVar(key:'CHART_NAME', value: 'confluentinc/cp-helm-charts'), 
+    podEnvVar(key:'CHART_NAME', value: 'chartmuseum/api-node-gekko'), 
     podEnvVar(key:'NAMESPACE', value: 'dev'), 
   ]) {
   node(POD_LABEL){
@@ -20,7 +20,7 @@ podTemplate(containers: [
           container('helm'){
             sh '''
             helm init --client-only
-            helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/
+            helm repo add chartmuseum http://chartmuseum-chartmuseum.chartmuseum.svc.cluster.local:8080
             helm repo update
             helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME || helm upgrade $BRANCH_NAME $CHART_NAME
             echo '######################## Deploy node-workers End #################################'
