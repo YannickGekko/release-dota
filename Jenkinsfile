@@ -2,27 +2,28 @@ podTemplate(containers: [
   containerTemplate(name: 'helm', image: 'alpine/helm:latest', command: 'cat', ttyEnabled: true)
   ], 
   envVars: [
-    podEnvVar(key:'CHART_NAME', value: 'stable/grafana'), 
-    podEnvVar(key:'NAMESPACE', value: 'admin'), 
+    podEnvVar(key:'CHART_NAME', value: 'confluentinc/cp-helm-charts'), 
+    podEnvVar(key:'NAMESPACE', value: 'dev'), 
   ]) {
   node(POD_LABEL){
     def test = 'export ohhl'
       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Dotaki_Preprod_Cred']]){
         stage('Git clone '){
           sh '''
-          echo '######################## Deploy grafana chart Start #################################'
+          echo '######################## Deploy node-workers Start #################################'
           git clone https://github.com/YannickGekko/dotaki-api-node.git
           cd dotaki-api-node
           git checkout $BRANCH_NAME
           '''
         }
-        stage('Deploy grafana chart'){
+        stage('Deploy api-node-gekko '){
           container('helm'){
             sh '''
             helm init --client-only
+            helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/
             helm repo update
             helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME || helm upgrade $BRANCH_NAME $CHART_NAME
-            echo '######################## Deploy grafana chart End #################################'
+            echo '######################## Deploy node-workers End #################################'
             '''
           }
         }
