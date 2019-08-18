@@ -2,25 +2,24 @@ podTemplate(containers: [
   containerTemplate(name: 'helm', image: 'alpine/helm:latest', command: 'cat', ttyEnabled: true)
   ], 
   envVars: [
-    podEnvVar(key:'CHART_NAME', value: 'confluentinc/cp-helm-charts'), 
-    podEnvVar(key:'NAMESPACE', value: 'dev'), 
+    podEnvVar(key:'CHART_NAME', value: 'stable/metrics-server'), 
+    podEnvVar(key:'NAMESPACE', value: 'admin'), 
   ]) {
   node(POD_LABEL){
     def test = 'export ohhl'
       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Dotaki_Preprod_Cred']]){
         stage('Git clone '){
           sh '''
-          echo '######################## Deploy node-workers Start #################################'
-          git clone https://github.com/YannickGekko/dotaki-api-node.git
+          echo '######################## Deploy Metrics-server Chart Start #################################'
+          git clone https://github.com/loick-gekko/dotaki-api-node.git
           cd dotaki-api-node
           git checkout $BRANCH_NAME
           '''
         }
-        stage('Deploy api-node-gekko '){
+        stage('Deploy Metrics-server Chart '){
           container('helm'){
             sh '''
             helm init --client-only
-            helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/
             helm repo update
             helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME || helm upgrade $BRANCH_NAME $CHART_NAME
             echo '######################## Deploy node-workers End #################################'
