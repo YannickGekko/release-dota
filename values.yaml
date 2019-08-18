@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: 133845867148.dkr.ecr.eu-west-1.amazonaws.com/api-node-gekko-jenkins
-  tag: 39178bb20990f74d299ac87b0695a7b77a0cac75
+  tag: 5b735eb31c27045bccf40c157374dccee98afcd0
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
