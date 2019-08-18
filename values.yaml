@@ -67,7 +67,7 @@ env:
     # disable Prometheus metrics
     DISABLE_METRICS: true
     # disable all routes prefixed with /api
-    DISABLE_API: true
+    DISABLE_API: false
     # allow chart versions to be re-uploaded
     ALLOW_OVERWRITE: false
     # absolute url for .tgzs in index.yaml
@@ -177,9 +177,9 @@ tolerations: []
 affinity: {}
 
 persistence:
-  enabled: false
+  enabled: true
   accessMode: ReadWriteOnce
-  size: 8Gi
+  size: 30Gi
   labels: {}
   #   name: value
   ## A manually managed Persistent Volume and Claim
@@ -194,7 +194,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  # storageClass: "-"
+  storageClass: "gp2"
   # volumeName:
   pv:
     enabled: false
