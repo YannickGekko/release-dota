@@ -12,7 +12,7 @@ podTemplate(containers: [
           sh '''
           echo '######################## Deploy Prometheus Chart Start #################################'
           git clone https://github.com/loick-gekko/release-dota.git
-          cd dotaki-api-node
+          cd release-dota
           git checkout $BRANCH_NAME
           '''
         }
