@@ -22,7 +22,7 @@ podTemplate(containers: [
             helm init --client-only
             helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/
             helm repo update
-            helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME || helm upgrade $BRANCH_NAME $CHART_NAME
+            helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME -f values.yaml  || helm upgrade $BRANCH_NAME $CHART_NAME -f values.yaml
             echo '######################## Deploy node-workers End #################################'
             '''
           }
