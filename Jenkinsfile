@@ -2,7 +2,7 @@ podTemplate(containers: [
   containerTemplate(name: 'helm', image: 'alpine/helm:latest', command: 'cat', ttyEnabled: true)
   ], 
   envVars: [
-    podEnvVar(key:'CHART_NAME', value: 'stable/chartmuseum'), 
+    podEnvVar(key:'CHART_NAME', value: 'chartmuseum/chartmuseum'), 
     podEnvVar(key:'NAMESPACE', value: 'admin'), 
   ]) {
   node(POD_LABEL){
