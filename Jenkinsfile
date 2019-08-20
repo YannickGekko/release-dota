@@ -21,7 +21,7 @@ podTemplate(containers: [
             sh '''
             helm init --client-only
             helm repo update
-            helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME || helm upgrade $BRANCH_NAME $CHART_NAME
+            helm install $CHART_NAME --namespace $NAMESPACE --name $BRANCH_NAME -f values.yaml  || helm upgrade $BRANCH_NAME $CHART_NAME -f values.yaml
             echo '######################## Deploy grafana chart End #################################'
             '''
           }
