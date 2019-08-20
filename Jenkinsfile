@@ -19,6 +19,7 @@ podTemplate(containers: [
         stage('Deploy api-node-gekko '){
           container('helm'){
             sh '''
+            cd release-dota
             helm init --client-only
             helm repo add chartmuseum http://chartmuseum-chartmuseum.admin.svc.cluster.local:8080
             helm repo update
