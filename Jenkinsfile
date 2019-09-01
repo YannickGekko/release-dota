@@ -2,7 +2,7 @@ podTemplate(containers: [
   containerTemplate(name: 'helm', image: 'alpine/helm:latest', command: 'cat', ttyEnabled: true)
   ], 
   envVars: [
-    podEnvVar(key:'CHART_NAME', value: 'stable/redis'), 
+    podEnvVar(key:'CHART_NAME', value: 'stable/cert-manager'), 
     podEnvVar(key:'NAMESPACE', value: 'admin'), 
   ]) {
   node(POD_LABEL){
@@ -10,13 +10,13 @@ podTemplate(containers: [
       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Dotaki_Preprod_Cred']]){
         stage('Git clone '){
           sh '''
-          echo '######################## Deploy Redis Chart Start #################################'
+          echo '######################## Deploy Cert-manager Chart Start #################################'
           git clone https://github.com/YannickGekko/release-dota.git
           cd release-dota
           git checkout $BRANCH_NAME
           '''
         }
-        stage('Deploy Redis Chart '){
+        stage('Deploy Cert-manager Chart '){
           container('helm'){
             sh '''
             cd release-dota
