@@ -11,7 +11,7 @@ podTemplate(containers: [
         stage('Git clone '){
           sh '''
           echo '######################## Deploy Redis Chart Start #################################'
-          git clone https://github.com/loick-gekko/release-dota.git
+          git clone https://github.com/YannickGekko/release-dota.git
           cd release-dota
           git checkout $BRANCH_NAME
           '''
