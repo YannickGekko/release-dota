@@ -2,7 +2,7 @@ podTemplate(containers: [
   containerTemplate(name: 'helm', image: 'alpine/helm:latest', command: 'cat', ttyEnabled: true)
   ], 
   envVars: [
-    podEnvVar(key:'CHART_NAME', value: 'stable/chartmuseum'), 
+    podEnvVar(key:'CHART_NAME', value: 'stable/redis'), 
     podEnvVar(key:'NAMESPACE', value: 'admin'), 
   ]) {
   node(POD_LABEL){
@@ -10,13 +10,13 @@ podTemplate(containers: [
       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Dotaki_Preprod_Cred']]){
         stage('Git clone '){
           sh '''
-          echo '######################## Deploy Chartmuseum Chart Start #################################'
+          echo '######################## Deploy Redis Chart Start #################################'
           git clone https://github.com/loick-gekko/release-dota.git
           cd release-dota
           git checkout $BRANCH_NAME
           '''
         }
-        stage('Deploy Chartmuseum Chart '){
+        stage('Deploy Redis Chart '){
           container('helm'){
             sh '''
             cd release-dota
